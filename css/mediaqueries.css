@@ -1,0 +1,25 @@
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .photographer_section {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 50px;
+    }
+    header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    header h1, header .logo {
+        margin: 0;
+    }
+}
+
+/* Additional media queries for even smaller screens if needed */
+@media (max-width: 480px) {
+    .photographer_section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 30px;
+    }
+}
