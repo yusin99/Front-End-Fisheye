@@ -11,8 +11,12 @@ function getPhotographerDataById(photographerId) {
 
             // Filter media and photographer information for the specific photographer
             const photographerData = {
-                media: data.media.filter((item) => item.photographerId === numericPhotographerId),
-                photographer: data.photographers.find((photographer) => photographer.id === numericPhotographerId),
+                media: data.media.filter(
+                    (item) => item.photographerId === numericPhotographerId
+                ),
+                photographer: data.photographers.find(
+                    (photographer) => photographer.id === numericPhotographerId
+                ),
             };
             return photographerData;
         })
@@ -24,20 +28,18 @@ function getPhotographerDataById(photographerId) {
 // Example usage
 const photographerId = window.location.hash.substring(1);
 async function displayData(photographer) {
-    const photographersSection = document.querySelector(
-        ".photograph-header"
-    );
+    const photographerHeader = document.querySelector(".photograph-header");
 
-        const photographerModel = photographerTemplate(photographer);
-        const userCardDOM = photographerModel.generatePhotographerCard();
-        photographersSection.appendChild(userCardDOM);
+    const photographerModel = photographerTemplate(photographer);
+    const userCardDOM = photographerModel.generatePhotographerCard();
+    photographerHeader.appendChild(userCardDOM);
 }
 
 async function init() {
     try {
-        const  photographers  = await getPhotographerDataById(photographerId);
+        const photographer = await getPhotographerDataById(photographerId);
         // Display data using your actual displayData function
-        displayData(photographers.photographer);
+        displayData(photographer.photographer);
     } catch (error) {
         console.error("Initialization error:", error);
     } finally {
@@ -48,4 +50,3 @@ async function init() {
 }
 
 init();
-
