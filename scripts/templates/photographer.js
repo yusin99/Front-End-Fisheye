@@ -1,42 +1,27 @@
 function photographerTemplate(data) {
-    const { name, portrait, city, country, tagline, price } = data;
-
-    // Remove symbols and spaces from the name, leaving only letters
+    const { name, portrait, city, country, tagline, price, id } = data;
     const cleanedName = name.replace(/[^a-zA-Z]/g, "");
-
     const picture = `assets/photographers/${portrait}`;
 
     function getUserCardDOM() {
         const article = document.createElement("article");
-        const img = document.createElement("img");
-        img.setAttribute("src", picture);
-        img.style.objectFit = "cover";
-        img.style.borderRadius = "50%";
+        const link = document.createElement("a");
 
-        const h2 = document.createElement("h2");
-        h2.textContent = cleanedName; // Use the cleaned name
-        article.appendChild(img);
-        article.appendChild(h2);
+        // Set the href attribute to "#" if you don't have a specific link target
+        link.setAttribute("href", `./photographer.html#${id}`);
 
-        // Additional elements directly under h2
-        const h4 = document.createElement("h4");
-        h4.textContent = `${city}, ${country}`;
+        link.innerHTML = `
+            <img src="${picture}" alt="${cleanedName}" style="object-fit: cover; border-radius: 50%;">
+            <h2>${cleanedName}</h2>
+            <h4>${city}, ${country}</h4>
+            <p style="font-size: 10px;">${tagline}</p>
+            <p style="font-size: 9px;">${price}$</p>
+        `;
 
-        const paragraph1 = document.createElement("p");
-        paragraph1.textContent = `${tagline}`;
-        paragraph1.style.fontSize = "10px";
-
-        const paragraph2 = document.createElement("p");
-        paragraph2.textContent = `${price}$`;
-        paragraph2.style.fontSize = "9px";
-
-        // Append elements directly under h2
-        article.appendChild(h4);
-        article.appendChild(paragraph1);
-        article.appendChild(paragraph2);
+        // Append the link to the article
+        article.appendChild(link);
 
         return article;
     }
-
     return { name: cleanedName, picture, getUserCardDOM };
 }
