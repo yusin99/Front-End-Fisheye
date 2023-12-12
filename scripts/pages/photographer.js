@@ -28,18 +28,24 @@ function getPhotographerDataById(photographerId) {
 // Example usage
 const photographerId = window.location.hash.substring(1);
 async function displayData(photographer) {
+    console.log(photographer)
     const photographerHeader = document.querySelector(".photograph-header");
+    const photographerRealisations = document.querySelector(".photographer-realisations");
 
-    const photographerModel = photographerTemplate(photographer);
+    const photographerModel = photographerTemplate(photographer.photographer);
+    const realisationsModel = mediaTemplate(photographer.media, photographer.photographer);
     const userCardDOM = photographerModel.generatePhotographerCard();
+    const userRealisations = realisationsModel.getUserMedia();
     photographerHeader.appendChild(userCardDOM);
+    console.log(userRealisations)
+    photographerRealisations.appendChild(userRealisations);
 }
 
 async function init() {
     try {
         const photographer = await getPhotographerDataById(photographerId);
         // Display data using your actual displayData function
-        displayData(photographer.photographer);
+        displayData(photographer);
     } catch (error) {
         console.error("Initialization error:", error);
     } finally {
