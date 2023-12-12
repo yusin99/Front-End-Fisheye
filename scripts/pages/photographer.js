@@ -23,8 +23,29 @@ function getPhotographerDataById(photographerId) {
 
 // Example usage
 const photographerId = window.location.hash.substring(1);
-getPhotographerDataById(photographerId).then((data) => {
-    // Handle the data for the specific photographer
-    console.log("Photographer Data:", data);
-});
+async function displayData(photographer) {
+    const photographersSection = document.querySelector(
+        ".photograph-header"
+    );
+
+        const photographerModel = photographerTemplate(photographer);
+        const userCardDOM = photographerModel.generatePhotographerCard();
+        photographersSection.appendChild(userCardDOM);
+}
+
+async function init() {
+    try {
+        const  photographers  = await getPhotographerDataById(photographerId);
+        // Display data using your actual displayData function
+        displayData(photographers.photographer);
+    } catch (error) {
+        console.error("Initialization error:", error);
+    } finally {
+        // Hide the spinner in case of success or error
+        // const spinner = document.getElementById("spinner");
+        // spinner.style.display = "none";
+    }
+}
+
+init();
 

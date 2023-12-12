@@ -23,5 +23,28 @@ function photographerTemplate(data) {
 
         return article;
     }
-    return { name: cleanedName, picture, getUserCardDOM };
+
+    function generatePhotographerCard() {
+        const photographerCard = document.createElement("div");
+        photographerCard.className = "photograph-section"
+        
+        photographerCard.innerHTML = `
+        <div>
+            <h2>${name}</h2>
+            <p>${city}, ${country}</p>
+            <p>${tagline}</p>
+        </div>
+        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <img src="${picture}" alt="${cleanedName}" style="object-fit: cover; border-radius: 50%; width: 200px; height: 200px">
+    `;
+
+        return photographerCard;
+    }
+
+    return {
+        name: cleanedName,
+        picture,
+        getUserCardDOM,
+        generatePhotographerCard,
+    };
 }
