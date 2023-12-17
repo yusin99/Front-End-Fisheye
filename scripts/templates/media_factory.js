@@ -37,6 +37,7 @@ function mediaTemplate(data, photographer) {
                     <h3 aria-label="Titre du média">${item.title}</h3>
                     <h3 class="likes">${item.likes} <i class="fa fa-heart"></i></h3>
                 </div>
+                <div style="position: fixed; bottom: 0; right: 50px; width: 376px; height: 89px; background: #DB8876; border-radius: 5px;">$${photographer.price}</div>
             `;
 
             mediaContainer.appendChild(mediaElement);
