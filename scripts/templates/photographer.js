@@ -42,7 +42,7 @@ function photographerTemplate(data) {
     }
 
     return {
-        name: cleanedName,
+        name,
         picture,
         getUserCardDOM,
         generatePhotographerCard,
