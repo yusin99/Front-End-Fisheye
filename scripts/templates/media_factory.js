@@ -12,21 +12,21 @@
 function mediaTemplate(data, photographer) {
     const media = data;
     const photographerName = photographer.name;
+    let totalLikes = 0;
 
     function getUserMedia() {
         const mediaContainer = document.createElement("div");
-        mediaContainer.style.display = "flex";
-        mediaContainer.style.flexWrap = "wrap";  // Allow items to wrap to the next row
-        mediaContainer.style.justifyContent = "space-between"; // Spread items evenly
-
+        mediaContainer.classList.add("media-container")
+    
+        // Create the fixed-position element outside the loop
+        const fixedPositionElement = document.createElement("div");
+        fixedPositionElement.classList.add("fixed-position-element")
+        mediaContainer.appendChild(fixedPositionElement);
+    
         media.forEach((item) => {
             const mediaElement = document.createElement("article");
-            mediaElement.style.boxSizing = "border-box";  // Include padding and border in the element's total width and height
-            mediaElement.style.flexBasis = "30%";  // Set flex basis to a percentage for 3 items per row
-            mediaElement.style.marginBottom = "20px"; // Add margin between items
-
-            mediaElement.style.height = "351px";
-            mediaElement.style.width = "100%";  // Make sure each item takes the full width of its flex container
+            mediaElement.classList.add("media-element");
+            totalLikes += item.likes;
             mediaElement.innerHTML = `
                 ${
                     item.image
@@ -35,19 +35,41 @@ function mediaTemplate(data, photographer) {
                 }
                 <div class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
                     <h3 aria-label="Titre du média">${item.title}</h3>
-                    <h3 class="likes">${item.likes} <i class="fa fa-heart"></i></h3>
+                    <h3 class="likes" data-media="${item.title}">${
+                        item.likes
+                    } <i class="fa ${item.liked ? 'fa-heart' : 'fa-heart-o'}"></i></h3>
                 </div>
-                <div style="position: fixed; bottom: 0; right: 50px; width: 376px; height: 89px; background: #DB8876; border-radius: 5px;">$${photographer.price}</div>
             `;
-
+    
+            // Add click event listener to the 'likes' element
+            mediaElement.querySelector(".likes").addEventListener("click", () => {
+                if (!item.liked) {
+                    totalLikes++;
+                    item.likes++;
+                    item.liked = true;
+                } else {
+                    totalLikes--;
+                    item.likes--;
+                    item.liked = false;
+                }
+                updateMediaLikes(item);
+                updateTotalLikes(totalLikes);
+            });
+    
             mediaContainer.appendChild(mediaElement);
         });
-
+    
+        // Append the fixed-position element to the container after all media elements
+        fixedPositionElement.innerHTML = `
+            <div class="total-likes"><i class="fa fa-heart"></i> ${totalLikes}</div>
+            <div>${photographer.price} $/jour</div>
+        `;
+    
         return mediaContainer;
     }
+    
 
     return {
         getUserMedia,
     };
 }
-

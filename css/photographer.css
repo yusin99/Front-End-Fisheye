@@ -95,3 +95,32 @@ form textarea {
     resize: vertical;
     height: 200px;
 }
+
+.media-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.fixed-position-element {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 24px;
+    z-index: 2;
+    bottom: 0;
+    right: 50px;
+    width: 376px;
+    height: 89px;
+    background: #DB8876;
+    border-radius: 5px;
+}
+
+.media-element {
+    box-sizing: border-box;
+    flex-basis: 30%;
+    margin-bottom: 20px;
+    height: 351px;
+    width: 100%;
+}
