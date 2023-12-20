@@ -16,7 +16,7 @@
  * @returns {Object} An object with functions for generating user media and lightbox.
  */
 function mediaTemplate(data, photographer) {
-    const media = data;
+    let media = data;
     const photographerName = photographer.name;
     let totalLikes = 0;
     let currentImageIndex = 0;
@@ -54,7 +54,6 @@ function mediaTemplate(data, photographer) {
         if (imageElement) {
             imageElement.addEventListener("click", () => {
                 currentImageIndex = index;
-                console.log(currentImageIndex);
                 openLightbox(item.image || item.video);
             });
         }
@@ -68,13 +67,16 @@ function mediaTemplate(data, photographer) {
      *
      * @returns {HTMLElement} The user's media container.
      */
-    function getUserMedia() {
+    function getUserMedia(userMedia) {
+        mediaContainer.innerHTML = "";
+        // Reset totalLikes to zero before calculating the total for the updated media
+        totalLikes = 0;
         mediaContainer.classList.add("media-container");
         const fixedPositionElement = document.createElement("div");
         fixedPositionElement.classList.add("fixed-position-element");
         mediaContainer.appendChild(fixedPositionElement);
 
-        media.forEach((item, index) => {
+        (userMedia ? userMedia : media).forEach((item, index) => {
             createMediaElement(item, index);
         });
 
@@ -130,7 +132,6 @@ function mediaTemplate(data, photographer) {
         );
         lightboxContainer.style.display = "block";
         lightboxImage.src = `assets/images/${photographerName}/${image}`;
-        console.log(lightboxImage.src);
 
         lightboxContainer
             .querySelector(".close-lightbox")
@@ -146,7 +147,6 @@ function mediaTemplate(data, photographer) {
      */
     function navigateLightbox(direction) {
         currentImageIndex += direction;
-        console.log(currentImageIndex);
 
         if (currentImageIndex < 0) {
             currentImageIndex = mediaImages.length - 1;
@@ -167,6 +167,81 @@ function mediaTemplate(data, photographer) {
         );
         lightboxImage.src = "";
         lightboxContainer.style.display = "none";
+    }
+    const button = document.querySelector("#button");
+    const selectDropdown = document.querySelector("#dropdown");
+    const options = document.querySelectorAll(".option");
+    const selectLabel = document.querySelector("#select-label");
+    const btnArrow = document.querySelector(".btn-arrow");
+
+    button.addEventListener("click", function (e) {
+        e.preventDefault();
+        toggleHidden();
+    });
+
+    function toggleHidden() {
+        selectDropdown.classList.toggle("hidden");
+        btnArrow.classList.toggle("btn-rotate");
+    }
+
+    function setSelectTitle(e) {
+        const labelElement = document.querySelector(
+            `label[for="${e.target.id}"]`
+        ).innerText;
+        selectLabel.innerText = labelElement;
+        toggleHidden();
+        const selectedOption = e.target.value;
+        sort(selectedOption);
+    }
+
+    // Add event listeners for the options
+    options.forEach(function (option) {
+        option.addEventListener("click", function (e) {
+            setSelectTitle(e);
+        });
+    });
+
+    // External function named 'sort'
+    function sort(option) {
+        // Create a copy of the main array
+        const sortedMedia = [...media];
+
+        // Perform sorting based on the selected option
+        switch (option) {
+            case "title":
+                sortedMedia.sort((a, b) => a.title.localeCompare(b.title));
+                break;
+            case "date":
+                // Assuming 'date' is a property in your media objects
+                sortedMedia.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case "popularity":
+                sortedMedia.sort((a, b) => b.likes - a.likes);
+                break;
+            default:
+                console.log("Invalid sorting option");
+                return;
+        }
+
+        // Generate the updated mediaImages array based on the sorted order
+        const updatedMediaImages = sortedMedia.map(
+            (item) => item.image || item.video
+        );
+
+        // Update mediaImages
+        mediaImages.length = 0; // Clear existing items
+        mediaImages.push(...updatedMediaImages);
+
+        // After sorting, update and re-render the user media
+        const updatedMediaContainer = getUserMedia(sortedMedia);
+
+        // Replace the existing media container with the updated one
+        const existingMediaContainer =
+            document.querySelector(".media-container");
+        existingMediaContainer.parentNode.replaceChild(
+            updatedMediaContainer,
+            existingMediaContainer
+        );
     }
 
     return {

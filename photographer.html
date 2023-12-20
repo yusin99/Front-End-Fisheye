@@ -22,6 +22,24 @@
         <main id="main">
             <div class="photograph-header"></div>
             <div class="photograph-filter"></div>
+            <div class="select-group">
+                <h2 class="select-text">Trier par</h2>
+                <button id="button" class="btn-sort" aria-haspopup="listbox" aria-expanded="false">
+                    <span id="select-label" class="btn-text">Popularité</span>
+                    <div id="arrow" class="btn-arrow"></div>
+                </button>
+            
+                <fieldset class="dropdown hidden" id="dropdown" role="listbox">
+                    <legend class="select-legend">Choisir de trier par:</legend>
+                    <input type="radio" id="popularite" value="popularity" class="option" role="button">
+                    <label for="popularite" class="select-item" tabindex="0">Popularité</label>
+                    <input type="radio" id="date" value="date" class="option" role="button">
+                    <label for="date" class="select-item" tabindex="0">Date</label>
+                    <input type="radio" id="title" value="title" class="option" role="button">
+                    <label for="title" class="select-item" tabindex="0">Titre</label>
+                </fieldset>
+            </div>
+            
             <div
                 class="photographer-realisations"
                 style="padding: 100px 100px 0 100px"
