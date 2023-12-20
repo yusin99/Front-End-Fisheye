@@ -28,17 +28,20 @@ function getPhotographerDataById(photographerId) {
 // Example usage
 const photographerId = window.location.hash.substring(1);
 async function displayData(photographer) {
-    console.log(photographer)
     const photographerHeader = document.querySelector(".photograph-header");
     const photographerRealisations = document.querySelector(".photographer-realisations");
+    const lightbox = document.querySelector(".lightbox_modal");
 
     const photographerModel = photographerTemplate(photographer.photographer);
     const realisationsModel = mediaTemplate(photographer.media, photographer.photographer);
+
     const userCardDOM = photographerModel.generatePhotographerCard();
     const userRealisations = realisationsModel.getUserMedia();
+    const lightboxModal = realisationsModel.generateLightbox();
+
     photographerHeader.appendChild(userCardDOM);
-    console.log(userRealisations)
     photographerRealisations.appendChild(userRealisations);
+    lightbox.appendChild(lightboxModal);
 }
 
 async function init() {
