@@ -117,6 +117,21 @@ function mediaTemplate(data, photographer) {
                 navigateLightbox(1);
             });
 
+        document.addEventListener("keydown", handleKeyPress);
+
+        function handleKeyPress(event) {
+            if (event.key === "ArrowLeft") {
+                // Navigate to the previous image
+                navigateLightbox(-1);
+            } else if (event.key === "ArrowRight") {
+                // Navigate to the next image
+                navigateLightbox(1);
+            } else if (event.key === "Escape") {
+                // Close the lightbox on Escape key
+                closeLightbox();
+            }
+        }
+
         return lightboxContainer;
     }
 
