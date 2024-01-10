@@ -36,8 +36,8 @@ function mediaTemplate(data, photographer) {
         mediaElement.innerHTML = `
             ${
                 item.image
-                    ? `<img src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_img" style="object-fit: cover;width: 100%; height: 300px;">`
-                    : `<video src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_video" controls style="object-fit: cover;width: 100%; height: 300px;"></video>`
+                    ? `<img src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px;">`
+                    : `<video src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px;"></video>`
             }
             <div class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
                 <h3 aria-label="Titre du média">${item.title}</h3>
@@ -50,7 +50,7 @@ function mediaTemplate(data, photographer) {
             totalLikes = updateLikes(item, totalLikes);
         });
 
-        const imageElement = mediaElement.querySelector(".book_img");
+        const imageElement = mediaElement.querySelector(".book_asset");
         if (imageElement) {
             imageElement.addEventListener("click", () => {
                 currentImageIndex = index;
@@ -100,6 +100,7 @@ function mediaTemplate(data, photographer) {
             <div class="photo-container">
                 <div class="lightbox-controller-left">&#10094;</div>
                 <img src="/" class="lightbox-current-photo"/>
+                <video src="/" class="lightbox-current-video"></video>
                 <div class="lightbox-controller-right">&#10095;</div>
                 <div class="close-lightbox">X</div>
             </div>
@@ -140,19 +141,40 @@ function mediaTemplate(data, photographer) {
      *
      * @param {string} image - The source of the image to display in the lightbox.
      */
-    function openLightbox(image) {
+    function openLightbox(media) {
         const lightboxContainer = document.querySelector(".lightbox-container");
-        const lightboxImage = lightboxContainer.querySelector(
-            ".lightbox-current-photo"
-        );
-        lightboxContainer.style.display = "block";
-        lightboxImage.src = `assets/images/${photographerName}/${image}`;
-
+        const mediaExtension = media.split('.').pop().toLowerCase();
+        let currentAsset;
+    
+        if (['jpg', 'jpeg', 'png', 'gif'].includes(mediaExtension)) {
+            currentAsset = "img";
+        } else if (['mp4', 'webm', 'ogg'].includes(mediaExtension)) {
+            currentAsset = "video";
+        } else {
+            // Unsupported media type
+            console.error("Unsupported media type");
+            return;
+        }
+    
+        const lightboxAssetImg = lightboxContainer.querySelector(".lightbox-current-photo");
+        const lightboxAssetVideo = lightboxContainer.querySelector(".lightbox-current-video");
+    
+        lightboxAssetImg.style.display = currentAsset === "img" ? "block" : "none";
+        lightboxAssetVideo.style.display = currentAsset === "video" ? "block" : "none";
+    
+        if (currentAsset === "img") {
+            lightboxAssetImg.src = `assets/images/${photographerName}/${media}`;
+        } else if (currentAsset === "video") {
+            lightboxAssetVideo.src = `assets/images/${photographerName}/${media}`;
+            lightboxAssetVideo.controls = true;
+        }
+    
         lightboxContainer
             .querySelector(".close-lightbox")
             .addEventListener("click", () => {
                 closeLightbox();
             });
+        lightboxContainer.style.display = "block";
     }
 
     /**
