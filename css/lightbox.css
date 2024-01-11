@@ -8,7 +8,7 @@
 }
 
 .photo-container{
-    height: 100%;
+    height: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,6 +18,14 @@
     width: 90%;
     height: 90%;
     object-fit: cover;
+    display: none;
+}
+.lightbox-current-video{
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    display: none;
+
 }
 
 .lightbox-controller-left,

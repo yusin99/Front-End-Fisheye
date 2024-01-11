@@ -36,11 +36,11 @@ function mediaTemplate(data, photographer) {
         mediaElement.innerHTML = `
             ${
                 item.image
-                    ? `<img src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px;">`
-                    : `<video src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px;"></video>`
+                    ? `<img src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;">`
+                    : `<video autoplay src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;"></video>`
             }
             <div class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
-                <h3 aria-label="Titre du média">${item.title}</h3>
+                <h3 aria-label="${item.title}" class="image-title">${item.title}</h3>
                 <h3 class="likes" data-media="${item.title}">${
             item.likes
         } <i class="fa ${item.liked ? "fa-heart" : "fa-heart-o"}"></i></h3>
@@ -54,12 +54,12 @@ function mediaTemplate(data, photographer) {
         if (imageElement) {
             imageElement.addEventListener("click", () => {
                 currentImageIndex = index;
-                openLightbox(item.image || item.video);
+                openLightbox(item);
             });
         }
 
         mediaContainer.appendChild(mediaElement);
-        mediaImages.push(item.image || item.video);
+        mediaImages.push(item);
     }
 
     /**
@@ -100,7 +100,7 @@ function mediaTemplate(data, photographer) {
             <div class="photo-container">
                 <div class="lightbox-controller-left">&#10094;</div>
                 <img src="/" class="lightbox-current-photo"/>
-                <video src="/" class="lightbox-current-video"></video>
+                <video autoplay src="/" class="lightbox-current-video"></video>
                 <div class="lightbox-controller-right">&#10095;</div>
                 <div class="close-lightbox">X</div>
             </div>
@@ -141,34 +141,43 @@ function mediaTemplate(data, photographer) {
      *
      * @param {string} image - The source of the image to display in the lightbox.
      */
-    function openLightbox(media) {
+    function openLightbox(asset) {
+        let media = asset.image || asset.video;
         const lightboxContainer = document.querySelector(".lightbox-container");
-        const mediaExtension = media.split('.').pop().toLowerCase();
+        const mediaExtension = media.split(".").pop().toLowerCase();
         let currentAsset;
-    
-        if (['jpg', 'jpeg', 'png', 'gif'].includes(mediaExtension)) {
+
+        if (["jpg", "jpeg", "png", "gif"].includes(mediaExtension)) {
             currentAsset = "img";
-        } else if (['mp4', 'webm', 'ogg'].includes(mediaExtension)) {
+        } else if (["mp4", "webm", "ogg"].includes(mediaExtension)) {
             currentAsset = "video";
         } else {
             // Unsupported media type
             console.error("Unsupported media type");
             return;
         }
-    
-        const lightboxAssetImg = lightboxContainer.querySelector(".lightbox-current-photo");
-        const lightboxAssetVideo = lightboxContainer.querySelector(".lightbox-current-video");
-    
-        lightboxAssetImg.style.display = currentAsset === "img" ? "block" : "none";
-        lightboxAssetVideo.style.display = currentAsset === "video" ? "block" : "none";
-    
+
+        const lightboxAssetImg = lightboxContainer.querySelector(
+            ".lightbox-current-photo"
+        );
+        const lightboxAssetVideo = lightboxContainer.querySelector(
+            ".lightbox-current-video"
+        );
+        const lightboxAssetTitle = lightboxContainer.querySelector(".photo-title")
+
+        lightboxAssetTitle.innerHTML = asset.title;
+        lightboxAssetImg.style.display =
+            currentAsset === "img" ? "block" : "none";
+        lightboxAssetVideo.style.display =
+            currentAsset === "video" ? "block" : "none";
+
         if (currentAsset === "img") {
             lightboxAssetImg.src = `assets/images/${photographerName}/${media}`;
         } else if (currentAsset === "video") {
             lightboxAssetVideo.src = `assets/images/${photographerName}/${media}`;
             lightboxAssetVideo.controls = true;
         }
-    
+
         lightboxContainer
             .querySelector(".close-lightbox")
             .addEventListener("click", () => {

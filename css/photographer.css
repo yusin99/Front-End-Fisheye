@@ -23,6 +23,31 @@
     align-items: center;
     height: 100%;
 }
+.photograph-section h1 {
+    color: #d3573c;
+    font-size: 64px;
+    font-family: DM Sans;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+.photograph-section .location {
+    color: #901c1c;
+    font-size: 24px;
+    font-family: DM Sans;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+.photograph-section .description {
+    color: #525252;
+    font-size: 18px;
+    font-family: DM Sans;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+.photograph-section h1,
+.photograph-section p {
+    padding: 10px;
+}
 
 .contact_button {
     font-size: 20px;
@@ -96,7 +121,7 @@ form textarea {
     height: 200px;
 }
 
-.media-container{
+.media-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -113,7 +138,7 @@ form textarea {
     right: 50px;
     width: 376px;
     height: 89px;
-    background: #DB8876;
+    background: #db8876;
     border-radius: 5px;
 }
 
@@ -125,12 +150,11 @@ form textarea {
     width: 100%;
 }
 
-
 .select-group {
     position: relative;
     display: flex;
     align-items: center;
-    margin: 30px 80px;
+    margin: 30px 100px;
     font-size: 18px;
     font-weight: 700;
 }
@@ -140,11 +164,21 @@ form textarea {
     font-size: 18px;
 }
 
+.photo-title {
+    color: #901c1c;
+    font-size: 24px;
+    font-family: DM Sans;
+    font-weight: 400;
+    word-wrap: break-word;
+    margin-top: -30px;
+    padding: 0 50px;
+}
+
 .btn-sort {
     display: flex;
     justify-content: space-between;
     width: 170px;
-    background-color:#901C1C;
+    background-color: #901c1c;
     color: white;
     padding: 20px;
     border: none;
@@ -152,9 +186,11 @@ form textarea {
 }
 
 .btn-text {
-    font-family: "DM Sans", sans-serif;
+    color: white;
     font-size: 18px;
+    font-family: DM Sans;
     font-weight: 700;
+    word-wrap: break-word;
 }
 
 .btn-arrow {
@@ -176,7 +212,7 @@ form textarea {
     left: 87px;
     width: 143px;
     color: white;
-    background-color: #901C1C;
+    background-color: #901c1c;
     border-radius: 5px;
     margin-top: -5px;
     border: none;
@@ -199,7 +235,12 @@ form textarea {
     display: block;
     padding: 15px 0;
     border-bottom: solid 2px white;
-    transition: opacity .3s;
+    transition: opacity 0.3s;
+    color: white;
+    font-size: 18px;
+    font-family: DM Sans;
+    font-weight: 700;
+    word-wrap: break-word;
 }
 
 .select-item:last-child {
@@ -213,7 +254,20 @@ form textarea {
 .hidden {
     display: none;
 }
-
+.image-title {
+    color: #901c1c;
+    font-size: 24px;
+    font-family: DM Sans;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+.likes {
+    color: #901c1c;
+    font-size: 24px;
+    font-family: DM Sans;
+    font-weight: 400;
+    word-wrap: break-word;
+}
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -222,15 +276,20 @@ form textarea {
     width: 170px;
     height: 70px;
     border: none;
-    background-color: #901C1C;
+    background-color: #901c1c;
     border-radius: 5px;
     cursor: pointer;
     order: 2;
-    transition: .3s;
+    transition: 0.3s;
+    color: white;
+    font-size: 20px;
+    font-family: DM Sans;
+    font-weight: 700;
+    word-wrap: break-word;
 }
 
-.contact_button:hover, .contact_button:focus {
+.contact_button:hover,
+.contact_button:focus {
     color: black;
-    background-color: #DB8876;
-
+    background-color: #db8876;
 }
