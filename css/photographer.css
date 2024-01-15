@@ -163,6 +163,16 @@ form textarea {
     padding-right: 20px;
     font-size: 18px;
 }
+.photo-button-section{
+    width: 60%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: row-reverse;
+}
+.photographer-realisations{
+    padding: 100px 100px 0 100px;
+}
 
 .photo-title {
     color: #901c1c;

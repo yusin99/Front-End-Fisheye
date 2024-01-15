@@ -33,11 +33,7 @@ function photographerTemplate(data) {
         <p class="location">${city}, ${country}</p>
         <p class="description">${tagline}</p>
         </div>
-        <div style="width: 60%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        flex-direction: row-reverse;">
+        <div class="photo-button-section">
         <img src="${picture}" alt="${name}" style="object-fit: cover; border-radius: 50%; width: 200px; height: 200px">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         </div>

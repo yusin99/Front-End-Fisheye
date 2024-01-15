@@ -1,5 +1,58 @@
-/* Media query for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+    .photographer_section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 30px;
+    }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    .photograph-section h1, .photograph-section p{
+        padding: 10px 0;
+    }
+    .photo-button-section{
+        width: 100%;
+        align-items: start;
+    }
+    .photo-container .close-lightbox{
+        top: 25px;
+    }
+    .fixed-position-element{
+        width: 100%;
+        margin: 0;
+        right: 0;
+    }
+    header{
+        padding: 0 30px;
+    }
+    .select-group{
+        margin: 30px 30px;
+    }
+    .photo-button-section{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .photograph-header{
+        height: auto;
+        margin: 0 30px;
+        padding: 0;
+    }
+    .photographer-realisations{
+        padding: 30px
+    }
+    .photograph-section{
+        flex-direction: column;
+    }
+    .media-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
     .photographer_section {
         grid-template-columns: 1fr 1fr;
         gap: 30px;
@@ -14,12 +67,7 @@
         margin: 0;
     }
 }
-
-/* Additional media queries for even smaller screens if needed */
-@media (max-width: 480px) {
-    .photographer_section {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-top: 30px;
-    }
-}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}
