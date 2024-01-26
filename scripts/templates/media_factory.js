@@ -36,14 +36,14 @@ function mediaTemplate(data, photographer) {
         mediaElement.innerHTML = `
             ${
                 item.image
-                    ? `<img src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;">`
-                    : `<video autoplay src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;"></video>`
+                    ? `<img tabindex="3" src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;">`
+                    : `<video tabindex="3" autoplay src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;"></video>`
             }
-            <div class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
+            <div  class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
                 <h3 aria-label="${item.title}" class="image-title">${item.title}</h3>
                 <h3 class="likes" data-media="${item.title}">${
             item.likes
-        } <i class="fa ${item.liked ? "fa-heart" : "fa-heart-o"}"></i></h3>
+        } <i tabindex="3" class="fa ${item.liked ? "fa-heart" : "fa-heart-o"}"></i></h3>
             </div>`;
 
         mediaElement.querySelector(".likes").addEventListener("click", () => {
@@ -88,6 +88,7 @@ function mediaTemplate(data, photographer) {
         return mediaContainer;
     }
 
+    // TODO: add tabindex to elements (not every photo but manage it)
     /**
      * Generates and returns the lightbox container with navigation controls.
      *
@@ -98,11 +99,11 @@ function mediaTemplate(data, photographer) {
         lightboxContainer.classList.add("lightbox-container");
         lightboxContainer.innerHTML = `
             <div class="photo-container">
-                <div class="lightbox-controller-left">&#10094;</div>
-                <img src="/" class="lightbox-current-photo"/>
-                <video autoplay src="/" class="lightbox-current-video"></video>
-                <div class="lightbox-controller-right">&#10095;</div>
-                <div class="close-lightbox">X</div>
+                <div class="lightbox-controller-left" tabindex="1">&#10094;</div>
+                <img src="/" class="lightbox-current-photo" tabindex="1"/>
+                <video autoplay src="/" class="lightbox-current-video" tabindex="1"></video>
+                <div class="lightbox-controller-right" tabindex="1">&#10095;</div>
+                <div class="close-lightbox" tabindex="1">X</div>
             </div>
             <div class="photo-title"></div>`;
 

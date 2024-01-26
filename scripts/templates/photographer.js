@@ -35,7 +35,7 @@ function photographerTemplate(data) {
         </div>
         <div class="photo-button-section">
         <img src="${picture}" alt="${name}" style="object-fit: cover; border-radius: 50%; width: 200px; height: 200px">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" tabindex="1">Contactez-moi</button>
         </div>
     `;
 
