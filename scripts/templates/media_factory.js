@@ -40,10 +40,14 @@ function mediaTemplate(data, photographer) {
                     : `<video tabindex="3" autoplay src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;"></video>`
             }
             <div  class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
-                <h3 aria-label="${item.title}" class="image-title">${item.title}</h3>
+                <h3 aria-label="${item.title}" class="image-title">${
+            item.title
+        }</h3>
                 <h3 class="likes" data-media="${item.title}">${
             item.likes
-        } <i tabindex="3" class="fa ${item.liked ? "fa-heart" : "fa-heart-o"}"></i></h3>
+        } <i tabindex="3" class="fa ${
+            item.liked ? "fa-heart" : "fa-heart-o"
+        }"></i></h3>
             </div>`;
 
         mediaElement.querySelector(".likes").addEventListener("click", () => {
@@ -164,7 +168,8 @@ function mediaTemplate(data, photographer) {
         const lightboxAssetVideo = lightboxContainer.querySelector(
             ".lightbox-current-video"
         );
-        const lightboxAssetTitle = lightboxContainer.querySelector(".photo-title")
+        const lightboxAssetTitle =
+            lightboxContainer.querySelector(".photo-title");
 
         lightboxAssetTitle.innerHTML = asset.title;
         lightboxAssetImg.style.display =
@@ -271,13 +276,11 @@ function mediaTemplate(data, photographer) {
         }
 
         // Generate the updated mediaImages array based on the sorted order
-        const updatedMediaImages = sortedMedia.map(
-            (item) => item.image || item.video
-        );
+        const updatedMediaObjects = [...sortedMedia];
 
         // Update mediaImages
         mediaImages.length = 0; // Clear existing items
-        mediaImages.push(...updatedMediaImages);
+        mediaImages.push(...updatedMediaObjects);
 
         // After sorting, update and re-render the user media
         const updatedMediaContainer = getUserMedia(sortedMedia);
