@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function updateLikes(item, totalLikes){
     if (!item.liked) {
         totalLikes++;

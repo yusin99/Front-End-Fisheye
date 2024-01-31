@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 function photographerTemplate(data) {
     const { name, portrait, city, country, tagline, price, id } = data;
     const picture = `assets/photographers/${portrait}`;
@@ -35,7 +36,7 @@ function photographerTemplate(data) {
         </div>
         <div class="photo-button-section">
         <img src="${picture}" alt="${name}" style="object-fit: cover; border-radius: 50%; width: 200px; height: 200px">
-        <button class="contact_button" onclick="displayModal()" tabindex="1">Contactez-moi</button>
+        <button class="contact_button" onclick="displayModal()" >Contactez-moi</button>
         </div>
     `;
 

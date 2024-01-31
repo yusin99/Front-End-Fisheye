@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Media format
 // date: "2011-12-08";
 // id: 342550;
@@ -15,6 +16,7 @@
  * @param {Object} photographer - Photographer information.
  * @returns {Object} An object with functions for generating user media and lightbox.
  */
+// eslint-disable-next-line no-unused-vars
 function mediaTemplate(data, photographer) {
     let media = data;
     const photographerName = photographer.name;
@@ -36,18 +38,18 @@ function mediaTemplate(data, photographer) {
         mediaElement.innerHTML = `
             ${
                 item.image
-                    ? `<img tabindex="3" src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;">`
-                    : `<video tabindex="3" autoplay src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;"></video>`
+                    ? `<img src="assets/images/${photographerName}/${item.image}" alt="${item.title}" class="book_asset" style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;" tabindex="1">`
+                    : `<video autoplay src="assets/images/${photographerName}/${item.video}" alt="${item.title}" class="book_asset" controls style="object-fit: cover;width: 100%; height: 300px; border-radius: 5px;" tabindex="1"></video>`
             }
             <div  class="legend" style="display: flex; justify-content: space-between; color: #901C1C; padding-top: 10px">
                 <h3 aria-label="${item.title}" class="image-title">${
             item.title
         }</h3>
-                <h3 class="likes" data-media="${item.title}">${
+                <button tabindex="1" class="likes" data-media="${item.title}">${
             item.likes
-        } <i tabindex="3" class="fa ${
+        } <i class="fa ${
             item.liked ? "fa-heart" : "fa-heart-o"
-        }"></i></h3>
+        }"></i></button>
             </div>`;
 
         mediaElement.querySelector(".likes").addEventListener("click", () => {
@@ -61,6 +63,13 @@ function mediaTemplate(data, photographer) {
                 openLightbox(item);
             });
         }
+
+        imageElement.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                currentImageIndex = index;
+                openLightbox(item);
+            }
+        });
 
         mediaContainer.appendChild(mediaElement);
         mediaImages.push(item);
@@ -103,11 +112,11 @@ function mediaTemplate(data, photographer) {
         lightboxContainer.classList.add("lightbox-container");
         lightboxContainer.innerHTML = `
             <div class="photo-container">
-                <div class="lightbox-controller-left" tabindex="1">&#10094;</div>
-                <img src="/" class="lightbox-current-photo" tabindex="1"/>
-                <video autoplay src="/" class="lightbox-current-video" tabindex="1"></video>
-                <div class="lightbox-controller-right" tabindex="1">&#10095;</div>
-                <div class="close-lightbox" tabindex="1">X</div>
+                <button class="lightbox-controller-left">&#10094;</button>
+                <img src="/" class="lightbox-current-photo"/>
+                <video autoplay src="/" class="lightbox-current-video" ></video>
+                <button class="lightbox-controller-right" >&#10095;</button>
+                <button class="close-lightbox" >X</button>
             </div>
             <div class="photo-title"></div>`;
 

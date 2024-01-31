@@ -17,25 +17,29 @@
 .lightbox-current-photo{
     width: 90%;
     height: 90%;
-    object-fit: cover;
+    object-fit: contain;
     display: none;
 }
 .lightbox-current-video{
     width: 90%;
     height: 90%;
-    object-fit: cover;
+    object-fit: contain;
     display: none;
 
+}
+button:focus {
+    border: 1px solid black;
 }
 
 .lightbox-controller-left,
 .lightbox-controller-right,
 .close-lightbox {
+    all: unset;
     cursor: pointer;
     font-size: 50px;
     color: #901C1C;
     padding: 10px;
-    border-radius: 50%;
+    border-radius: 999999px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

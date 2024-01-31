@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 //Mettre le code JavaScript lié à la page photographer.html
 
 // Function to fetch data for a single photographer based on ID

@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 // Get form values
-const form = document.getElementById("contactForm");
 const firstName = document.getElementById("prenom");
 const lastName = document.getElementById("nom");
 const email = document.getElementById("email");

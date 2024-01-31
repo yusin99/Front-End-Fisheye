@@ -22,6 +22,7 @@ async function displayData(photographers) {
     );
 
     photographers.forEach((photographer) => {
+        // eslint-disable-next-line no-undef
         const photographerModel = photographerTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
